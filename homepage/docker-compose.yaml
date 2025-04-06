@@ -2,6 +2,8 @@ services:
   homepage:
     image: ghcr.io/gethomepage/homepage:latest
     container_name: homepage
+    environment:
+      - HOMEPAGE_ALLOWED_HOSTS=10.1.10.10:3000,homepage.manage.openshaw.tech
     ports:
       - 3000:3000
     volumes:
