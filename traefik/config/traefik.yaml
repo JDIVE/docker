@@ -1,3 +1,6 @@
+log:
+  level: DEBUG
+
 api:
   dashboard: true
   # Dashboard is enabled but secured through basic auth middleware
@@ -43,21 +46,3 @@ providers:
 # Access logging configuration
 accessLog:
   filePath: "${TRAEFIK_LOG_PATH}"
-  
-# Configure the Traefik dashboard authentication
-http:
-  routers:
-    dashboard:
-      rule: "Host(`${DOMAIN_TRAEFIK}`)"
-      service: "api@internal"
-      entryPoints:
-        - websecure
-      middlewares:
-        - auth
-      tls:
-        certResolver: letsencrypt
-  middlewares:
-    auth:
-      basicAuth:
-        users:
-          - "${TRAEFIK_DASHBOARD_AUTH}"
