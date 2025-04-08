@@ -2,17 +2,36 @@
 # For configuration options and examples, please see:
 # https://gethomepage.dev/configs/services/
 
-- My First Group:
-    - My First Service:
-        href: http://localhost/
-        description: Homepage is awesome
+- Infrastructure:
+    - GitLab:
+        href: https://gitlab.manage.openshaw.tech
+        description: Git repository management and CI/CD platform
+        icon: gitlab
+    - Traefik:
+        href: https://traefik.manage.openshaw.tech
+        description: Edge Router and Reverse Proxy
+        icon: traefik
+    - Nginx Proxy Manager:
+        href: https://npm.manage.openshaw.tech
+        description: Web proxy and SSL certificate management
+        icon: nginx
 
-- My Second Group:
-    - My Second Service:
-        href: http://localhost/
-        description: Homepage is the best
+- Systems Management:
+    - Proxmox:
+        href: https://pve-01.manage.openshaw.tech
+        description: Virtualization Platform
+        icon: proxmox
+    - TrueNAS:
+        href: https://truenas-01.manage.openshaw.tech
+        description: Network Attached Storage
+        icon: truenas
+    - UniFi Controller:
+        href: https://unifi.manage.openshaw.tech
+        description: Network Management
+        icon: unifi
 
-- My Third Group:
-    - My Third Service:
-        href: http://localhost/
-        description: Homepage is 😎
+- AI & Development:
+    - Ollama:
+        href: https://ollama.manage.openshaw.tech
+        description: Local AI model serving platform
+        icon: docker
