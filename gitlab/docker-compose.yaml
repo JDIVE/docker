@@ -1,0 +1,24 @@
+services:
+  gitlab:
+    image: 'gitlab/gitlab-ce:latest'
+    container_name: gitlab
+    restart: unless-stopped
+    hostname: 'gitlab.manage.openshaw.tech'
+    environment:
+      GITLAB_OMNIBUS_CONFIG: |
+        external_url 'https://gitlab.manage.openshaw.tech'
+    ports:
+      - '8929:80'
+      - '8930:443'
+      - '8922:22'
+    volumes:
+      - './config:/etc/gitlab'
+      - './logs:/var/log/gitlab'
+      - './data:/var/opt/gitlab'
+    shm_size: '256m'
+    networks:
+      - proxy
+
+networks:
+  proxy:
+    external: true
