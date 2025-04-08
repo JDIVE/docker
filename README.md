@@ -32,6 +32,13 @@ This repository contains the Docker infrastructure for a self-hosted home lab en
 - Local AI model inference
 - API access for integration with other services
 
+### Mealie
+- Recipe management and meal planning
+- Automatic recipe import from websites
+- Shopping list generation
+- Meal calendar for planning
+- Mobile-friendly interface
+
 ## Getting Started
 
 ### Prerequisites
@@ -76,6 +83,9 @@ This repository contains the Docker infrastructure for a self-hosted home lab en
 
    cd ../homepage
    docker-compose up -d
+   
+   cd ../mealie
+   docker-compose up -d
    ```
 
 ## Configuration
@@ -101,12 +111,18 @@ Key features:
 - Custom styling: `homepage/data/custom.css`
 - Widgets: `homepage/data/widgets.yaml`
 
+### Mealie
+- Docker Compose configuration: `mealie/docker-compose.yaml`
+- Data storage: `mealie/data/`
+- Recipe templates: `mealie/data/templates/`
+
 ## Backup and Maintenance
 
 ### Data Persistence
 All important data is stored in Docker volumes or bind-mounted directories:
 - GitLab data: `gitlab/data/`
 - Homepage configurations: `homepage/data/`
+- Mealie data: `mealie/data/`
 - SSL certificates: Managed by Traefik in `traefik/data/acme.json`
 
 ### Backup Recommendations
