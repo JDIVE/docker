@@ -1,0 +1,6 @@
+# Ignore Mealie data files
+data/*
+!data/.gitkeep
+
+# Exception for docker-compose.yaml which we want to track
+!docker-compose.yaml 

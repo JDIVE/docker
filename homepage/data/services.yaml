@@ -35,3 +35,9 @@
         href: https://ollama.manage.openshaw.tech
         description: Local AI model serving platform
         icon: docker
+
+- Home:
+    - Mealie:
+        href: https://mealie.manage.openshaw.tech
+        description: Recipe management and meal planning
+        icon: mdi-silverware-fork-knife
