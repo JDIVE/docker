@@ -1,0 +1,19 @@
+# Application data
+**/data/*
+!**/data/.gitkeep
+
+# Nginx Proxy Manager data
+nginx-proxy-manager/data/
+nginx-proxy-manager/letsencrypt/
+
+# Traefik data
+traefik/data/acme.json
+
+# Let's Encrypt certificates
+**/letsencrypt/
+
+# Environment files
+**/.env
+
+# Logs
+**/logs/
