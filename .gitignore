@@ -1,6 +1,7 @@
 # Application data
 **/data/*
 !**/data/.gitkeep
+!**/data/services.yaml
 
 # Nginx Proxy Manager data
 nginx-proxy-manager/data/
