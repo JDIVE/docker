@@ -18,3 +18,6 @@ traefik/data/acme.json
 
 # Logs
 **/logs/
+
+# GitLab config
+gitlab/config/
