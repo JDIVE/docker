@@ -1,0 +1,63 @@
+api:
+  dashboard: true
+  # Dashboard is enabled but secured through basic auth middleware
+  insecure: false
+
+entryPoints:
+  web:
+    address: ":80"
+    http:
+      redirections:
+        entryPoint:
+          to: websecure
+          scheme: https
+  websecure:
+    address: ":443"
+    http:
+      tls:
+        certResolver: letsencrypt
+        domains:
+          - main: "manage.openshaw.tech"
+            sans: ["*.manage.openshaw.tech"]
+
+# Configure your certificate resolver here
+certificatesResolvers:
+  letsencrypt:
+    acme:
+      email: "jamie.openshaw.uk@outlook.com"
+      storage: /acme.json
+      dnsChallenge:
+        provider: cloudflare
+        resolvers:
+          - "1.1.1.1:53"
+          - "1.0.0.1:53"
+
+providers:
+  docker:
+    endpoint: "unix:///var/run/docker.sock"
+    exposedByDefault: false
+    network: proxy
+  file:
+    filename: /etc/traefik/config.yaml
+
+# Access logging configuration
+accessLog:
+  filePath: "${TRAEFIK_LOG_PATH}"
+  
+# Configure the Traefik dashboard authentication
+http:
+  routers:
+    dashboard:
+      rule: "Host(`${DOMAIN_TRAEFIK}`)"
+      service: "api@internal"
+      entryPoints:
+        - websecure
+      middlewares:
+        - auth
+      tls:
+        certResolver: letsencrypt
+  middlewares:
+    auth:
+      basicAuth:
+        users:
+          - "${TRAEFIK_DASHBOARD_AUTH}"

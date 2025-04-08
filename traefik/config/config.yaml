@@ -1,0 +1,69 @@
+http:
+  routers:
+    # TrueNAS Configuration
+    truenas:
+      rule: "Host(`truenas-01.manage.openshaw.tech`)"
+      entryPoints:
+        - websecure
+      service: truenas-service
+      tls:
+        certResolver: letsencrypt
+
+    # Proxmox Configuration
+    proxmox:
+      rule: "Host(`pve-01.manage.openshaw.tech`)"
+      entryPoints:
+        - websecure
+      service: proxmox-service
+      tls:
+        certResolver: letsencrypt
+
+    # UniFi Controller Configuration
+    unifi:
+      rule: "Host(`unifi.manage.openshaw.tech`)"
+      entryPoints:
+        - websecure
+      service: unifi-service
+      tls:
+        certResolver: letsencrypt
+      middlewares:
+        - unifi-headers
+
+  services:
+    # TrueNAS Service Configuration
+    truenas-service:
+      loadBalancer:
+        servers:
+          - url: "https://10.1.10.15:443"
+        passHostHeader: true
+        serversTransport: insecure-transport
+
+    # Proxmox Service Configuration
+    proxmox-service:
+      loadBalancer:
+        servers:
+          - url: "https://10.1.10.2:8006"
+        passHostHeader: true
+        serversTransport: insecure-transport
+
+    # UniFi Service Configuration
+    unifi-service:
+      loadBalancer:
+        servers:
+          - url: "https://10.1.10.1:443"
+        passHostHeader: true
+        serversTransport: insecure-transport
+
+  middlewares:
+    # Custom headers for UniFi
+    unifi-headers:
+      headers:
+        customRequestHeaders:
+          X-Forwarded-Proto: "https"
+        hostsProxyHeaders:
+          - "X-Forwarded-Host"
+
+  serversTransports:
+    # Allow self-signed certificates on backend servers
+    insecure-transport:
+      insecureSkipVerify: true
