@@ -18,6 +18,7 @@ services:
       - "traefik.http.routers.homepage.entrypoints=websecure"
       - "traefik.http.routers.homepage.tls.certresolver=letsencrypt"
       - "traefik.http.services.homepage.loadbalancer.server.port=3000"
+    restart: always
 
 networks:
   proxy:
