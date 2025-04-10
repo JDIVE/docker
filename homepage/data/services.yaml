@@ -41,3 +41,7 @@
         href: https://mealie.manage.openshaw.tech
         description: Recipe management and meal planning
         icon: mdi-silverware-fork-knife
+    - Jellyfin:
+        href: https://jellyfin.manage.openshaw.tech
+        description: Media server for movies, TV shows, music, and photos
+        icon: jellyfin
