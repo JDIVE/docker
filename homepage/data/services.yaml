@@ -35,6 +35,10 @@
         href: https://ollama.manage.openshaw.tech
         description: Local AI model serving platform
         icon: docker
+    - n8n:
+        href: https://n8n.manage.openshaw.tech
+        description: Workflow automation platform
+        icon: n8n
 
 - Home:
     - Mealie:
