@@ -35,6 +35,10 @@
         href: https://ollama.manage.openshaw.tech
         description: Local AI model serving platform
         icon: docker
+    - Open WebUI:
+        href: https://ai.manage.openshaw.tech
+        description: Web interface for Ollama AI models
+        icon: mdi-robot
     - n8n:
         href: https://n8n.manage.openshaw.tech
         description: Workflow automation platform
