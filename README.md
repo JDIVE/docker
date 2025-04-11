@@ -65,6 +65,13 @@ This repository contains the Docker infrastructure for a self-hosted home lab en
 - Meal calendar for planning
 - Mobile-friendly interface
 
+#### Home Assistant
+- Home automation platform
+- IoT device integration and control
+- Automation workflows
+- Energy monitoring
+- Accessed via Traefik reverse proxy
+
 ### AI & Development
 
 #### Ollama
@@ -209,7 +216,86 @@ docker compose up -d
 cd ..
 ```
 
-#### 8. Verify Deployments
+#### 8. Home Assistant Setup
+
+Home Assistant requires specific configuration to work properly with the reverse proxy:
+
+```bash
+# Create necessary directories
+mkdir -p homeassistant/config
+
+# Create required configuration files
+cd homeassistant
+
+# Create configuration.yaml with proper reverse proxy settings
+cat > config/configuration.yaml << 'EOF'
+# Configure a default setup of Home Assistant (frontend, api, etc)
+default_config:
+
+http:
+  use_x_forwarded_for: true
+  trusted_proxies:
+    - 172.19.0.2  # Traefik container IP on proxy network
+    - 127.0.0.1   # Localhost
+
+homeassistant:
+  # Name of the location where Home Assistant is running
+  name: Home
+  # Location required to calculate the time the sun rises and sets
+  latitude: 51.5074  # Example: London latitude
+  longitude: 0.1278  # Example: London longitude
+  # Impacts weather/sunrise data (altitude in meters)
+  elevation: 0
+  # metric for Metric, imperial for Imperial
+  unit_system: metric
+  # Pick yours from here: http://en.wikipedia.org/wiki/List_of_tz_database_time_zones
+  time_zone: Europe/London
+
+# Text to speech
+tts:
+  - platform: google_translate
+
+# Enable configuration validation
+automation: !include automations.yaml
+script: !include scripts.yaml
+scene: !include scenes.yaml
+EOF
+
+# Create essential empty files (these are required even if empty)
+cat > config/automations.yaml << 'EOF'
+# Empty automations.yaml file
+# Your automations will be added here
+
+[]
+EOF
+
+cat > config/scripts.yaml << 'EOF'
+# Empty scripts.yaml file
+# Your scripts will be added here
+
+{}
+EOF
+
+cat > config/scenes.yaml << 'EOF'
+# Empty scenes.yaml file
+# Your scenes will be added here
+
+[]
+EOF
+
+# Start Home Assistant
+docker compose up -d
+cd ..
+```
+
+**Important Notes for Home Assistant:**
+- The empty automations.yaml, scripts.yaml, and scenes.yaml files are **required** for Home Assistant to start properly
+- The trusted_proxies section must include the Traefik container's IP address (172.19.0.2 on the proxy network)
+- You can verify the Traefik IP with `docker network inspect proxy`
+- Time zone and location should be configured to your specific location
+- Access Home Assistant at https://ha.manage.openshaw.tech (or your configured domain)
+
+#### 9. Verify Deployments
 
 Check that all containers are running correctly:
 ```bash
