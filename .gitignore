@@ -21,3 +21,24 @@ traefik/data/acme.json
 
 # GitLab config
 gitlab/config/
+
+# Home Assistant specific exclusions
+# Database files
+homeassistant/config/*.db
+homeassistant/config/*.db-*
+
+# Log files
+homeassistant/config/*.log
+homeassistant/config/*.log.*
+
+# Sensitive data directories
+homeassistant/config/.storage/
+homeassistant/config/.cloud/
+homeassistant/config/deps/
+homeassistant/config/tts/
+homeassistant/config/www/community/
+homeassistant/config/image/
+
+# Other runtime files
+homeassistant/config/OZW_Log.txt
+homeassistant/config/.HA_VERSION
