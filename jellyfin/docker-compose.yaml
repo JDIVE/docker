@@ -28,8 +28,8 @@ services:
         reservations:
           devices:
             - driver: nvidia
-              count: 1
               capabilities: [gpu]
+              device_ids: ['1','0']  # Prefer RTX 3090 (GPU 1), fallback to P4 (GPU 0)
 volumes:
   jellyfin:
     driver: local
