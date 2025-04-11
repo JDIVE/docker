@@ -57,3 +57,7 @@
         href: https://jellyfin.manage.openshaw.tech
         description: Media server for movies, TV shows, music, and photos
         icon: jellyfin
+    - Home Assistant:
+        href: https://ha.manage.openshaw.tech
+        description: Open source home automation platform
+        icon: home-assistant
