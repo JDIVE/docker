@@ -1,0 +1,7 @@
+# Environment variables
+.env
+
+# Data directory contents
+data/*
+!data/.gitkeep
+!data/config.yaml 

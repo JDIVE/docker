@@ -1,0 +1,20 @@
+model_list:
+  - model_name: gpt-3.5-turbo
+    litellm_params:
+      model: ollama/llama2
+      api_base: http://ollama:11434
+  - model_name: gpt-4
+    litellm_params:
+      model: ollama/mistral
+      api_base: http://ollama:11434
+
+litellm_settings:
+  drop_params: True  # Drop unsupported params from requests
+  num_retries: 3     # Number of retries on rate limit / timeout
+  request_timeout: 30 # Timeout for requests in seconds
+  telemetry: False   # Disable telemetry
+
+environment_variables:
+  # Add your API keys here if needed
+  ANTHROPIC_API_KEY: ""
+  OPENAI_API_KEY: "" 

@@ -39,6 +39,10 @@
         href: https://ai.manage.openshaw.tech
         description: Web interface for Ollama AI models
         icon: mdi-robot
+    - LiteLLM:
+        href: https://litellm.manage.openshaw.tech
+        description: LLM API Gateway and Router
+        icon: mdi-api
     - n8n:
         href: https://n8n.manage.openshaw.tech
         description: Workflow automation platform
