@@ -39,6 +39,11 @@ homeassistant/config/tts/
 homeassistant/config/www/community/
 homeassistant/config/image/
 
+# Sensitive configuration files
+homeassistant/config/secrets.yaml
+homeassistant/config/known_devices.yaml
+homeassistant/config/ip_bans.yaml
+
 # Other runtime files
 homeassistant/config/OZW_Log.txt
 homeassistant/config/.HA_VERSION
