@@ -23,6 +23,10 @@ traefik/auth/
 # GitLab config
 gitlab/config/
 
+# Git backups
+docker-backup.git/
+.git_backup/
+
 # Home Assistant specific exclusions
 # Database files
 homeassistant/config/*.db
