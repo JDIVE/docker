@@ -472,6 +472,30 @@ Uptime Kuma stores its configuration in a SQLite database within its data volume
 rsync -avz ~/docker/uptime-kuma/data/ /path/to/backup/destination/uptime-kuma-data/
 ```
 
+#### AppFlowy
+AppFlowy has a comprehensive backup script that backs up the database, file storage, and configuration:
+
+```bash
+# Run the AppFlowy backup script manually
+/home/jamie/docker/appflowy/backup-appflowy.sh
+
+# The script is configured to run daily at 2 AM via cron
+# To view the cron configuration:
+crontab -l
+
+# Backups are stored in the appflowy/backups directory
+# with a 7-day retention policy
+ls -la ~/docker/appflowy/backups/
+```
+
+**AppFlowy Backup Components**:
+- PostgreSQL database (all user data, documents, settings)
+- Minio storage (all file attachments, media, uploads)
+- Environment configuration (`.env` file with all settings)
+
+**AppFlowy Recovery Procedures**:
+For detailed recovery instructions, see the dedicated guide in `~/docker/appflowy/backups/README.md`
+
 #### Critical Configuration Files
 Create a script to regularly backup your configuration files:
 
@@ -491,6 +515,10 @@ cp -r ~/docker/gitlab/config/gitlab.rb $BACKUP_DIR/gitlab-config
 
 # Backup SSL certificates
 cp ~/docker/traefik/data/acme.json $BACKUP_DIR/
+
+# Backup AppFlowy (already covered by its dedicated backup script)
+# For manual inclusion, copy the most recent backup:
+# cp ~/docker/appflowy/backups/appflowy_backup_*.tar.gz $BACKUP_DIR/
 
 # Compress backup
 tar -czf $BACKUP_DIR.tar.gz $BACKUP_DIR
@@ -518,7 +546,7 @@ echo "Pulling latest images..." >> $LOG_FILE
 docker compose pull >> $LOG_FILE 2>&1
 
 # Restart services with new images
-services=("traefik" "gitlab" "homepage" "mealie" "ollama" "jellyfin" "linkwarden" "uptime-kuma")
+services=("traefik" "gitlab" "homepage" "mealie" "ollama" "jellyfin" "linkwarden" "uptime-kuma" "appflowy")
 for service in "${services[@]}"; do
   echo "Updating $service..." >> $LOG_FILE
   cd ~/docker/$service
@@ -549,7 +577,7 @@ Perform these tasks monthly:
 
 3. Check container logs for errors:
    ```bash
-   for service in traefik gitlab homepage mealie ollama jellyfin linkwarden uptime-kuma; do
+   for service in traefik gitlab homepage mealie ollama jellyfin linkwarden uptime-kuma appflowy; do
      docker logs --tail 100 $service > /tmp/$service-logs.txt
    done
    grep -i error /tmp/*-logs.txt
@@ -567,6 +595,10 @@ Perform these tasks monthly:
    ```bash
    # Test restore a backup to a temporary location
    docker run --rm -v ~/docker/gitlab/data/backups:/backups -v /tmp/gitlab-restore:/restore gitlab/gitlab-ce bash -c "mkdir -p /restore && tar -xf /backups/latest-backup.tar -C /restore"
+   
+   # Verify AppFlowy backup integrity
+   mkdir -p /tmp/appflowy-test
+   tar -tzf ~/docker/appflowy/backups/appflowy_backup_*.tar.gz > /dev/null && echo "AppFlowy backup is valid"
    ```
 
 ## Security Considerations
