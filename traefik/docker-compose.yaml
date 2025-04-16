@@ -1,3 +1,5 @@
+version: '3'
+
 services:
   traefik:
     image: traefik:v2.10
@@ -6,28 +8,32 @@ services:
     security_opt:
       - no-new-privileges:true
     ports:
-      - "80:80"
-      - "443:443"
-      - "8080:8080"  # Traefik dashboard (secured)
+      - 80:80
+      - 443:443
+      - 8080:8080
     volumes:
+      - /etc/localtime:/etc/localtime:ro
       - /var/run/docker.sock:/var/run/docker.sock:ro
-      - ./config/traefik.yaml:/etc/traefik/traefik.yaml:ro
-      - ./config/config.yaml:/etc/traefik/config.yaml:ro
+      - ./data/traefik.log:/var/log/traefik/access.log
       - ./data/acme.json:/acme.json
-      - ./auth:/auth:ro
-    env_file:
-      - .env
+      - ./config:/etc/traefik
+      - ./auth:/auth
     environment:
-      - CLOUDFLARE_DNS_API_TOKEN=${CF_DNS_API_TOKEN}
+      - CF_API_EMAIL=${CF_API_EMAIL}
+      - CF_DNS_API_TOKEN=${CF_DNS_API_TOKEN}
     networks:
       - proxy
     labels:
       - "traefik.enable=true"
+      # Dashboard
       - "traefik.http.routers.traefik-dashboard.rule=Host(`${DOMAIN_TRAEFIK}`)"
       - "traefik.http.routers.traefik-dashboard.entrypoints=websecure"
+      - "traefik.http.routers.traefik-dashboard.tls.certresolver=letsencrypt"
       - "traefik.http.routers.traefik-dashboard.service=api@internal"
-      # Reference the middleware defined in config.yaml (provider@file)
+      # Enable auth middleware for dashboard
       - "traefik.http.routers.traefik-dashboard.middlewares=traefik-auth@file"
+      # Traefik port that the router is listening on
+      - "traefik.http.services.traefik-dashboard.loadbalancer.server.port=8080"
 
 networks:
   proxy:
