@@ -1,0 +1,40 @@
+# Configure a default setup of Home Assistant (frontend, api, etc)
+default_config:
+
+http:
+  use_x_forwarded_for: true
+  trusted_proxies:
+    - 172.19.0.2 # Traefik container IP on proxy network
+    - 127.0.0.1  # Add localhost just in case
+    # - 172.16.0.0/12 # Default Docker network range
+    # - 192.168.0.0/16 # Common LAN range
+    # - 10.0.0.0/8     # Another common LAN/internal range
+
+homeassistant:
+  # Name of the location where Home Assistant is running
+  name: Home
+  # Location required to calculate the time the sun rises and sets
+  latitude: 51.5074 # Example: London latitude
+  longitude: 0.1278 # Example: London longitude
+  # Impacts weather/sunrise data (altitude in meters)
+  elevation: 0
+  # metric for Metric, imperial for Imperial
+  unit_system: metric
+  # Pick yours from here: http://en.wikipedia.org/wiki/List_of_tz_database_time_zones
+  time_zone: Europe/London
+
+# Discover some devices automatically
+discovery:
+
+# Load the frontend
+frontend:
+  themes: !include_dir_merge_named themes
+
+# Text to speech
+tts:
+  - platform: google_translate
+
+# Enable configuration validation
+automation: !include automations.yaml
+script: !include scripts.yaml
+scene: !include scenes.yaml 

@@ -1,0 +1,49 @@
+services:
+  gitlab:
+    image: 'gitlab/gitlab-ce:latest'
+    container_name: gitlab
+    restart: unless-stopped
+    hostname: 'gitlab'
+    environment:
+      GITLAB_OMNIBUS_CONFIG: |
+        external_url 'https://gitlab.openshaw.tech'
+        nginx['listen_port'] = 80
+        # GitLab will use HTTP internally, but Traefik will handle HTTPS externally
+        nginx['listen_https'] = false
+        # Trust the proxy for SSL
+        nginx['real_ip_trusted_addresses'] = ['172.0.0.0/8', '192.168.0.0/16']
+        nginx['real_ip_header'] = 'X-Forwarded-For'
+        nginx['real_ip_recursive'] = 'on'
+        # Set this so GitLab knows requests are secure when passing through Traefik
+        nginx['proxy_set_headers'] = {
+          "X-Forwarded-Proto" => "https",
+          "X-Forwarded-Ssl" => "on"
+        }
+        gitlab_rails['gitlab_https'] = true
+        gitlab_rails['gitlab_protocol'] = "https"
+        letsencrypt['enable'] = false
+    ports:
+      - '8929:80'
+      - '8930:443'
+      - '8922:22'
+    volumes:
+      - './config:/etc/gitlab'
+      - './logs:/var/log/gitlab'
+      - './data:/var/opt/gitlab'
+    shm_size: '256m'
+    # Give GitLab more time to shut down gracefully to prevent issues like
+    # the PostgreSQL lock file error caused by unclean shutdowns.
+    stop_grace_period: 1m
+    networks:
+      - proxy
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.gitlab.rule=Host(`gitlab.openshaw.tech`)"
+      - "traefik.http.routers.gitlab.entrypoints=websecure"
+      - "traefik.http.routers.gitlab.tls=true"
+      - "traefik.http.routers.gitlab.tls.certresolver=letsencrypt"
+      - "traefik.http.services.gitlab.loadbalancer.server.port=80"
+
+networks:
+  proxy:
+    external: true

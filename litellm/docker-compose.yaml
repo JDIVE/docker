@@ -1,0 +1,27 @@
+version: '3'
+
+services:
+  litellm:
+    build: .
+    container_name: litellm
+    restart: unless-stopped
+    volumes:
+      - ./data:/app/data
+    env_file:
+      - .env
+    environment:
+      - PORT=${LITELLM_PORT}
+      - HOST=${LITELLM_HOST}
+      - MASTER_KEY=${LITELLM_MASTER_KEY}
+    networks:
+      - proxy
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.litellm.rule=Host(`litellm.openshaw.tech`)"
+      - "traefik.http.routers.litellm.entrypoints=websecure"
+      - "traefik.http.routers.litellm.tls.certresolver=letsencrypt"
+      - "traefik.http.services.litellm.loadbalancer.server.port=8000"
+
+networks:
+  proxy:
+    external: true 

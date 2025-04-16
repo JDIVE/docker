@@ -1,0 +1,77 @@
+---
+# For configuration options and examples, please see:
+# https://gethomepage.dev/configs/services/
+
+- Infrastructure:
+    - GitLab:
+        href: https://gitlab.openshaw.tech
+        description: Git repository management and CI/CD platform
+        icon: gitlab
+    - Traefik:
+        href: https://traefik.openshaw.tech
+        description: Edge Router and Reverse Proxy
+        icon: traefik
+    - Nginx Proxy Manager:
+        href: https://npm.openshaw.tech
+        description: Web proxy and SSL certificate management
+        icon: nginx
+    - Linkwarden:
+        href: https://linkwarden.openshaw.tech
+        description: Self-hosted collaborative bookmark manager
+        icon: linkwarden
+    - Kasm:
+        href: https://kasm.openshaw.tech
+        description: Container Streaming Platform
+        icon: kasm
+    - Uptime Kuma:
+        href: https://uptime.openshaw.tech
+        description: Service monitoring and status page
+        icon: uptime-kuma # Assuming a suitable icon exists or using a generic one
+
+- Productivity:
+    - AppFlowy:
+        href: https://notes.openshaw.tech
+        description: Open-source alternative to Notion for notes and knowledge management
+        icon: mdi-note-text-outline
+        
+- Systems Management:
+    - Proxmox:
+        href: https://pve-01.openshaw.tech
+        description: Virtualization Platform
+        icon: proxmox
+    - TrueNAS:
+        href: https://truenas-01.openshaw.tech
+        description: Network Attached Storage
+        icon: truenas
+    - UniFi Controller:
+        href: https://unifi.openshaw.tech
+        description: Network Management
+        icon: unifi
+
+- AI & Development:
+    - Open WebUI:
+        href: https://ai.openshaw.tech
+        description: Web interface for Ollama AI models
+        icon: mdi-robot
+    - LiteLLM:
+        href: https://litellm.openshaw.tech
+        description: LLM API Gateway and Router
+        icon: mdi-api
+    - n8n:
+        href: https://n8n.openshaw.tech
+        description: Workflow automation platform
+        icon: n8n
+
+- Home:
+    - Mealie:
+        href: https://recipes.openshaw.tech
+        description: Recipe management and meal planning
+        icon: mdi-silverware-fork-knife
+    - Jellyfin:
+        href: https://jellyfin.openshaw.tech
+        description: Media server for movies, TV shows, music, and photos
+        icon: jellyfin
+    - Home Assistant:
+        href: https://ha.openshaw.tech
+        description: Open source home automation platform
+        icon: home-assistant

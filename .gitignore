@@ -1,0 +1,51 @@
+# Application data
+**/data/*
+!**/data/.gitkeep
+!**/data/services.yaml
+
+# Nginx Proxy Manager data
+nginx-proxy-manager/data/
+nginx-proxy-manager/letsencrypt/
+
+# Traefik data
+traefik/data/acme.json
+traefik/auth/
+
+# Let's Encrypt certificates
+**/letsencrypt/
+
+# Environment files
+**/.env
+
+# Logs
+**/logs/
+
+# GitLab config
+gitlab/config/
+
+# Home Assistant specific exclusions
+# Database files
+homeassistant/config/*.db
+homeassistant/config/*.db-*
+
+# Log files
+homeassistant/config/*.log
+homeassistant/config/*.log.*
+
+# Sensitive data directories
+homeassistant/config/.storage/
+homeassistant/config/.cloud/
+homeassistant/config/deps/
+homeassistant/config/tts/
+homeassistant/config/www/community/
+homeassistant/config/image/
+
+# Sensitive configuration files
+homeassistant/config/secrets.yaml
+homeassistant/config/known_devices.yaml
+homeassistant/config/ip_bans.yaml
+
+# Other runtime files
+homeassistant/config/OZW_Log.txt
+homeassistant/config/.HA_VERSION
+appflowy_configs/.env

@@ -1,0 +1,52 @@
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: linkwarden_postgres
+    env_file: .env
+    restart: unless-stopped
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    networks:
+      - default # Internal network for DB communication
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $$POSTGRES_USER -d $$POSTGRES_DB || exit 1"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  linkwarden:
+    image: ghcr.io/linkwarden/linkwarden:latest
+    container_name: linkwarden
+    env_file: .env
+    environment:
+      # Use the internal postgres service name
+      - DATABASE_URL=postgresql://${POSTGRES_USER:-postgres}:${POSTGRES_PASSWORD}@postgres:5432/${POSTGRES_DB:-postgres}
+      # Ollama integration
+      - NEXT_PUBLIC_OLLAMA_ENDPOINT_URL=http://ollama:11434
+      - OLLAMA_MODEL=gemma3:27b
+    restart: unless-stopped
+    volumes:
+      - data:/data/data
+    networks:
+      - default # Internal network
+      - proxy   # External network for Traefik
+    depends_on:
+      postgres:
+        condition: service_healthy
+    labels:
+      - "traefik.enable=true"
+      # Router definition
+      - "traefik.http.routers.linkwarden.rule=Host(`linkwarden.openshaw.tech`)"
+      - "traefik.http.routers.linkwarden.entrypoints=websecure"
+      - "traefik.http.routers.linkwarden.tls.certresolver=letsencrypt"
+      # Service definition
+      - "traefik.http.services.linkwarden.loadbalancer.server.port=3000"
+
+volumes:
+  pgdata:
+  data:
+
+networks:
+  proxy:
+    external: true
+  default: # Define the default internal network 

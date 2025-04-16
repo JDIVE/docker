@@ -1,0 +1,27 @@
+version: '3.7'
+
+services:
+  uptime-kuma:
+    image: louislam/uptime-kuma:latest
+    container_name: uptime-kuma
+    restart: unless-stopped
+    ports:
+      - "3001:3001"
+    volumes:
+      - ./data:/app/data
+    networks:
+      - proxy
+    # Removed extra_hosts - instead use the external URL or IP to monitor GitLab
+    # When configuring Uptime Kuma, use your external DNS for monitoring:
+    # e.g., https://gitlab-monitor.openshaw.tech (a different domain than gitlab.openshaw.tech)
+    # or use the server's external IP with port 443
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.uptime-kuma.rule=Host(`uptime.openshaw.tech`)"
+      - "traefik.http.routers.uptime-kuma.entrypoints=websecure"
+      - "traefik.http.routers.uptime-kuma.tls.certresolver=letsencrypt"
+      - "traefik.http.services.uptime-kuma.loadbalancer.server.port=3001"
+
+networks:
+  proxy:
+    external: true
