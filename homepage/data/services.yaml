@@ -11,10 +11,7 @@
         href: https://traefik.openshaw.tech
         description: Edge Router and Reverse Proxy
         icon: traefik
-    - Nginx Proxy Manager:
-        href: https://npm.openshaw.tech
-        description: Web proxy and SSL certificate management
-        icon: nginx
+
     - Linkwarden:
         href: https://linkwarden.openshaw.tech
         description: Self-hosted collaborative bookmark manager
@@ -28,12 +25,7 @@
         description: Service monitoring and status page
         icon: uptime-kuma # Assuming a suitable icon exists or using a generic one
 
-- Productivity:
-    - AppFlowy:
-        href: https://notes.openshaw.tech
-        description: Open-source alternative to Notion for notes and knowledge management
-        icon: mdi-note-text-outline
-        
+
 - Systems Management:
     - Proxmox:
         href: https://pve-01.openshaw.tech
