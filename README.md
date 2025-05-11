@@ -32,10 +32,7 @@
 - Container registry
 - Issue tracking and project management
 
-#### Nginx Proxy Manager (Legacy)
-- Web UI for proxy management
-- SSL certificate management
-- Currently being migrated to Traefik
+
 
 ### Systems Management
 
@@ -106,12 +103,7 @@
 - Organize links with collections and tags
 - Accessed via Traefik reverse proxy
 
-#### AppFlowy
-- Open-source alternative to Notion
-- Knowledge base and note-taking application
-- Document management with rich text editor
-- Tasks and kanban boards
-- Accessed via Traefik reverse proxy
+
 
 ## Installation Guide
 
@@ -258,10 +250,7 @@ cd mealie
 docker compose up -d
 cd ..
 
-# Deploy AppFlowy
-cd appflowy
-docker compose up -d
-cd ..
+
 
 cd jellyfin
 docker compose up -d
@@ -315,12 +304,12 @@ Verify service access through your domain names:
   - Configures the dashboard and API access
   - Sets up certificate resolvers for Let's Encrypt
   - Defines Docker provider settings
-  
+
 - **Service rules**: `traefik/config/config.yaml`
   - Contains static service definitions for external services
   - Defines routing rules, middlewares, and load balancer options
   - Configures TLS settings for each service
-  
+
 - **Environment variables**: `traefik/.env`
   - Cloudflare API credentials for DNS challenges
   - Dashboard authentication credentials
@@ -340,15 +329,15 @@ Verify service access through your domain names:
   - Server settings, feature toggles, and integration options
   - SMTP configuration for email notifications
   - Backup settings and scheduling
-  
+
 - **Secrets**: `gitlab/config/gitlab-secrets.json`
   - Automatically generated secrets for GitLab services
   - Should not be manually edited
-  
+
 - **Custom SSL certificates**: `gitlab/config/ssl/`
   - SSL certificates are managed by Traefik
   - GitLab is configured to use HTTP behind Traefik's SSL termination
-  
+
 - **Important settings**:
   - GitLab is exposed on ports 8929 (HTTP), 8930 (HTTPS), and 8922 (SSH)
   - Traefik routes traffic based on the hostname `gitlab.openshaw.tech`
@@ -357,14 +346,14 @@ Verify service access through your domain names:
 - **Service configuration**: `homepage/data/services.yaml`
   - Defines service groups and their details
   - Sets icons, URLs, and descriptions for each service
-  
+
 - **Custom styling**: `homepage/data/custom.css`
   - Custom CSS for Homepage appearance
-  
+
 - **Widgets**: `homepage/data/widgets.yaml`
   - Configures dashboard widgets and their placement
   - Integrates with Docker for container status
-  
+
 - **Environment settings**:
   - Allowed hosts configuration: `HOMEPAGE_ALLOWED_HOSTS=10.1.10.10:3000,homepage.openshaw.tech`
   - Docker socket mounted for container integration
@@ -374,11 +363,11 @@ Verify service access through your domain names:
   - Container environment variables for user/group IDs
   - Volume mappings for configuration and media
   - Optional GPU passthrough (currently commented out)
-  
-- **Media directories**: 
+
+- **Media directories**:
   - `/mnt/dozer/media` mapped to `/data` inside the container
   - Persistent volume for configuration data
-  
+
 - **Network settings**:
   - Discovery ports: 7359/udp and 1900/udp for DLNA
   - Traefik labels for routing through `jellyfin.openshaw.tech`
@@ -387,12 +376,12 @@ Verify service access through your domain names:
 - **Docker Compose configuration**: `mealie/docker-compose.yaml`
   - Environment variables for feature toggles
   - Volume mappings for persistent data
-  
+
 - **Data storage**: `mealie/data/`
   - Database files
   - Recipe images and backups
   - User data and templates
-  
+
 - **Key settings**:
   - Recipe visibility: `RECIPE_PUBLIC=true`
   - Signup allowed: `ALLOW_SIGNUP=true`
@@ -403,11 +392,11 @@ Verify service access through your domain names:
   - Volume mapping for model storage
   - Network configuration for API access
   - GPU configuration for hardware acceleration
-  
+
 - **Data storage**: `ollama_data` Docker volume
   - Stores downloaded AI models
   - Persists configuration between container restarts
-  
+
 - **API access**:
   - Internal port 11434 exposed for API calls
   - Accessible through Traefik at `ollama.openshaw.tech`
@@ -472,29 +461,7 @@ Uptime Kuma stores its configuration in a SQLite database within its data volume
 rsync -avz ~/docker/uptime-kuma/data/ /path/to/backup/destination/uptime-kuma-data/
 ```
 
-#### AppFlowy
-AppFlowy has a comprehensive backup script that backs up the database, file storage, and configuration:
 
-```bash
-# Run the AppFlowy backup script manually
-/home/jamie/docker/appflowy/backup-appflowy.sh
-
-# The script is configured to run daily at 2 AM via cron
-# To view the cron configuration:
-crontab -l
-
-# Backups are stored in the appflowy/backups directory
-# with a 7-day retention policy
-ls -la ~/docker/appflowy/backups/
-```
-
-**AppFlowy Backup Components**:
-- PostgreSQL database (all user data, documents, settings)
-- Minio storage (all file attachments, media, uploads)
-- Environment configuration (`.env` file with all settings)
-
-**AppFlowy Recovery Procedures**:
-For detailed recovery instructions, see the dedicated guide in `~/docker/appflowy/backups/README.md`
 
 #### Critical Configuration Files
 Create a script to regularly backup your configuration files:
@@ -516,9 +483,7 @@ cp -r ~/docker/gitlab/config/gitlab.rb $BACKUP_DIR/gitlab-config
 # Backup SSL certificates
 cp ~/docker/traefik/data/acme.json $BACKUP_DIR/
 
-# Backup AppFlowy (already covered by its dedicated backup script)
-# For manual inclusion, copy the most recent backup:
-# cp ~/docker/appflowy/backups/appflowy_backup_*.tar.gz $BACKUP_DIR/
+
 
 # Compress backup
 tar -czf $BACKUP_DIR.tar.gz $BACKUP_DIR
@@ -546,7 +511,7 @@ echo "Pulling latest images..." >> $LOG_FILE
 docker compose pull >> $LOG_FILE 2>&1
 
 # Restart services with new images
-services=("traefik" "gitlab" "homepage" "mealie" "ollama" "jellyfin" "linkwarden" "uptime-kuma" "appflowy")
+services=("traefik" "gitlab" "homepage" "mealie" "ollama" "jellyfin" "linkwarden" "uptime-kuma")
 for service in "${services[@]}"; do
   echo "Updating $service..." >> $LOG_FILE
   cd ~/docker/$service
@@ -577,7 +542,7 @@ Perform these tasks monthly:
 
 3. Check container logs for errors:
    ```bash
-   for service in traefik gitlab homepage mealie ollama jellyfin linkwarden uptime-kuma appflowy; do
+   for service in traefik gitlab homepage mealie ollama jellyfin linkwarden uptime-kuma; do
      docker logs --tail 100 $service > /tmp/$service-logs.txt
    done
    grep -i error /tmp/*-logs.txt
@@ -595,10 +560,8 @@ Perform these tasks monthly:
    ```bash
    # Test restore a backup to a temporary location
    docker run --rm -v ~/docker/gitlab/data/backups:/backups -v /tmp/gitlab-restore:/restore gitlab/gitlab-ce bash -c "mkdir -p /restore && tar -xf /backups/latest-backup.tar -C /restore"
-   
-   # Verify AppFlowy backup integrity
-   mkdir -p /tmp/appflowy-test
-   tar -tzf ~/docker/appflowy/backups/appflowy_backup_*.tar.gz > /dev/null && echo "AppFlowy backup is valid"
+
+
    ```
 
 ## Security Considerations
@@ -649,7 +612,7 @@ Perform these tasks monthly:
    ```bash
    # Edit SSH configuration
    sudo nano /etc/ssh/sshd_config
-   
+
    # Recommended settings
    PermitRootLogin no
    PasswordAuthentication no
@@ -804,7 +767,7 @@ To add a new service to your infrastructure:
          # - "traefik.http.services.uptime-kuma.loadbalancer.server.port=3001"
        networks:
          - proxy
-   
+
    networks:
      proxy:
        external: true
@@ -834,35 +797,3 @@ For critical services, consider implementing high availability:
 ## License
 
 This project is licensed under the MIT License - see the LICENSE file for details.
-
-## AppFlowy Setup with Traefik
-
-AppFlowy requires special configuration to work with Traefik reverse proxy. The default Docker Compose configuration assumes direct access to the AppFlowy services, but with Traefik, we need to add an intermediary nginx container to handle routing.
-
-### Key Modifications for Traefik Integration
-
-1. **Added nginx as an intermediate service**:
-   - Created a custom nginx.conf file that routes traffic appropriately between Traefik and AppFlowy's services
-   - The nginx container connects to both the internal AppFlowy network and the Traefik proxy network
-   - All internal services remain on the default network, isolated from direct external access
-
-2. **Environment Variable Updates**:
-   - Ensured that `AF_BASE_URL` and `APPFLOWY_WEB_URL` point to the correct external domain
-   - Added `AF_GOTRUE_URL` to properly configure authentication endpoints
-   - Changed `SCHEME` from http to https for secure communication
-
-3. **Traefik Labels**:
-   - Added only to the nginx container, which serves as the single entry point from Traefik
-   - All internal routing is handled by nginx's configuration
-
-### Nginx Configuration
-
-The nginx.conf file contains routing rules for:
-- GoTrue authentication service (/gotrue/)
-- WebSocket connections (/event)
-- REST API endpoints (/api)
-- Admin Console (/console)
-- MinIO storage (/minio and /minio-api)
-- Root web application (/)
-
-This approach simplifies the Traefik configuration while maintaining the expected routing structure for AppFlowy's services.
