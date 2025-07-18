@@ -2,68 +2,136 @@
 # For configuration options and examples, please see:
 # https://gethomepage.dev/configs/services/
 
-- Infrastructure:
-    - GitLab:
-        href: https://gitlab.openshaw.tech
-        description: Git repository management and CI/CD platform
-        icon: gitlab
-    - Traefik:
-        href: https://traefik.openshaw.tech
-        description: Edge Router and Reverse Proxy
-        icon: traefik
+- Communication & Email:
+    - Gmail:
+        href: https://mail.google.com/
+        description: Google email service
+        icon: si-gmail
+    - Outlook:
+        href: https://outlook.com/
+        description: Microsoft email service
+        icon: si-microsoftoutlook
+    - Discord:
+        href: https://discord.com/
+        description: Voice, video, and text communication
+        icon: si-discord
 
-    - Linkwarden:
-        href: https://linkwarden.openshaw.tech
-        description: Self-hosted collaborative bookmark manager
-        icon: linkwarden
-    - Kasm:
-        href: https://kasm.openshaw.tech
-        description: Container Streaming Platform
-        icon: kasm
-    - Uptime Kuma:
-        href: https://uptime.openshaw.tech
-        description: Service monitoring and status page
-        icon: uptime-kuma # Assuming a suitable icon exists or using a generic one
-
-
-- Systems Management:
-    - Proxmox:
-        href: https://pve-01.openshaw.tech
-        description: Virtualization Platform
-        icon: proxmox
-    - TrueNAS:
-        href: https://truenas-01.openshaw.tech
-        description: Network Attached Storage
-        icon: truenas
-    - UniFi Controller:
-        href: https://unifi.openshaw.tech
-        description: Network Management
-        icon: unifi
-
-- AI & Development:
+- AI Services:
+    - Claude AI:
+        href: https://claude.ai/
+        description: Anthropic's AI assistant
+        icon: si-anthropic
+    - ChatGPT:
+        href: https://chatgpt.com/
+        description: OpenAI's conversational AI
+        icon: si-openai
+    - Google Gemini:
+        href: https://gemini.google.com/
+        description: Google's AI assistant
+        icon: si-google
+    - Google AI Studio:
+        href: https://aistudio.google.com/
+        description: Google's AI development platform
+        icon: si-google
+    - NotebookLM:
+        href: https://notebooklm.google.com/
+        description: Google's AI-powered note-taking
+        icon: si-googledocs
+    - Perplexity AI:
+        href: https://www.perplexity.ai/
+        description: AI-powered search and research
+        icon: si-perplexity
+    - Grok:
+        href: https://grok.com/
+        description: AI assistant by xAI
+        icon: si-x
     - Open WebUI:
         href: https://ai.openshaw.tech
         description: Web interface for Ollama AI models
-        icon: mdi-robot
+        icon: si-ollama
     - LiteLLM:
         href: https://litellm.openshaw.tech
         description: LLM API Gateway and Router
-        icon: mdi-api
+        icon: si-fastapi
+
+- Development & Code:
+    - GitHub:
+        href: https://github.com/
+        description: Git repository hosting and collaboration
+        icon: si-github
+    - GitLab:
+        href: https://gitlab.openshaw.tech
+        description: Git repository management and CI/CD platform
+        icon: si-gitlab
     - n8n:
         href: https://n8n.openshaw.tech
         description: Workflow automation platform
-        icon: n8n
+        icon: si-n8n
 
-- Home:
-    - Mealie:
-        href: https://recipes.openshaw.tech
-        description: Recipe management and meal planning
-        icon: mdi-silverware-fork-knife
+- Knowledge & Tasks:
+    - Linear:
+        href: https://linear.app/
+        description: Issue tracking and project management
+        icon: si-linear
+    - Notion:
+        href: https://notion.so/
+        description: All-in-one workspace for notes and docs
+        icon: si-notion
+    - Readwise Reader:
+        href: https://reader.readwise.io/
+        description: Read-it-later app with AI features
+        icon: si-readwise
+    - Linkwarden:
+        href: https://linkwarden.openshaw.tech
+        description: Self-hosted collaborative bookmark manager
+        icon: si-linkwarden
+
+- Infrastructure & Systems:
+    - Traefik:
+        href: https://traefik.openshaw.tech
+        description: Edge Router and Reverse Proxy
+        icon: si-traefikproxy
+    - Proxmox:
+        href: https://pve-01.openshaw.tech
+        description: Virtualization Platform
+        icon: si-proxmox
+    - TrueNAS:
+        href: https://truenas-01.openshaw.tech
+        description: Network Attached Storage
+        icon: si-truenas
+    - UniFi Controller:
+        href: https://unifi.openshaw.tech
+        description: Network Management
+        icon: si-ubiquiti
+    - Uptime Kuma:
+        href: https://uptime.openshaw.tech
+        description: Service monitoring and status page
+        icon: si-uptimekuma
+    - Kasm:
+        href: https://kasm.openshaw.tech
+        description: Container Streaming Platform
+        icon: si-kasmweb
+
+- Entertainment & Media:
+    - YouTube:
+        href: https://youtube.com/
+        description: Video sharing platform
+        icon: si-youtube
     - Jellyfin:
         href: https://jellyfin.openshaw.tech
         description: Media server for movies, TV shows, music, and photos
-        icon: jellyfin
+        icon: si-jellyfin
+    - Reddit:
+        href: https://reddit.com/
+        description: Social news aggregation and discussion
+        icon: si-reddit
+
+- Home & Personal:
+    - Mealie:
+        href: https://recipes.openshaw.tech
+        description: Recipe management and meal planning
+        icon: si-cookiecutter
     - Home Assistant:
         href: https://ha.openshaw.tech
         description: Open source home automation platform
-        icon: home-assistant
+        icon: si-homeassistant
