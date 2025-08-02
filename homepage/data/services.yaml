@@ -53,6 +53,10 @@
         href: https://litellm.openshaw.tech
         description: LLM API Gateway and Router
         icon: si-fastapi
+    - Chat PRD:
+        href: https://app.chatprd.ai/
+        description: AI copilot for writing product requirements documents
+        icon: mdi-file-document-edit
 
 - Development & Code:
     - GitHub:
@@ -71,6 +75,18 @@
         href: https://openshaw.app.n8n.cloud
         description: Workflow automation platform
         icon: si-n8n
+    - Replit:
+        href: https://replit.com/
+        description: Cloud-based IDE and development platform
+        icon: si-replit
+    - Lovable:
+        href: https://lovable.dev/
+        description: AI-powered app and website builder
+        icon: mdi-heart-circle
+    - Bolt:
+        href: https://bolt.new/
+        description: AI development environment by StackBlitz
+        icon: mdi-lightning-bolt
 
 - Knowledge & Tasks:
     - Linear:
