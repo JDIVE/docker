@@ -40,7 +40,7 @@
     - Perplexity AI:
         href: https://www.perplexity.ai/
         description: AI-powered search and research
-        icon: si-perplexity
+        icon: mdi-magnify
     - Grok:
         href: https://grok.com/
         description: AI assistant by xAI
@@ -48,7 +48,7 @@
     - Open WebUI:
         href: https://ai.openshaw.tech
         description: Web interface for Ollama AI models
-        icon: si-ollama
+        icon: mdi-robot
     - LiteLLM:
         href: https://litellm.openshaw.tech
         description: LLM API Gateway and Router
@@ -56,15 +56,19 @@
 
 - Development & Code:
     - GitHub:
-        href: https://github.com/
+        href: https://github.com/JDIVE?tab=repositories 
         description: Git repository hosting and collaboration
         icon: si-github
     - GitLab:
         href: https://gitlab.openshaw.tech
         description: Git repository management and CI/CD platform
         icon: si-gitlab
-    - n8n:
+    - n8n-self-hosted:
         href: https://n8n.openshaw.tech
+        description: Workflow automation platform
+        icon: si-n8n
+    - n8n-cloud:
+        href: https://openshaw.app.n8n.cloud
         description: Workflow automation platform
         icon: si-n8n
 
@@ -78,19 +82,19 @@
         description: All-in-one workspace for notes and docs
         icon: si-notion
     - Readwise Reader:
-        href: https://reader.readwise.io/
+        href: https://read.readwise.io/
         description: Read-it-later app with AI features
-        icon: si-readwise
+        icon: mdi-book-open
     - Linkwarden:
         href: https://linkwarden.openshaw.tech
         description: Self-hosted collaborative bookmark manager
-        icon: si-linkwarden
+        icon: mdi-bookmark
 
 - Infrastructure & Systems:
     - Traefik:
         href: https://traefik.openshaw.tech
         description: Edge Router and Reverse Proxy
-        icon: si-traefikproxy
+        icon: mdi-router-network
     - Proxmox:
         href: https://pve-01.openshaw.tech
         description: Virtualization Platform
@@ -98,7 +102,7 @@
     - TrueNAS:
         href: https://truenas-01.openshaw.tech
         description: Network Attached Storage
-        icon: si-truenas
+        icon: mdi-nas
     - UniFi Controller:
         href: https://unifi.openshaw.tech
         description: Network Management
@@ -106,11 +110,11 @@
     - Uptime Kuma:
         href: https://uptime.openshaw.tech
         description: Service monitoring and status page
-        icon: si-uptimekuma
+        icon: mdi-heart-pulse
     - Kasm:
         href: https://kasm.openshaw.tech
         description: Container Streaming Platform
-        icon: si-kasmweb
+        icon: mdi-desktop-classic
 
 - Entertainment & Media:
     - YouTube:
@@ -130,7 +134,7 @@
     - Mealie:
         href: https://recipes.openshaw.tech
         description: Recipe management and meal planning
-        icon: si-cookiecutter
+        icon: mdi-silverware-fork-knife
     - Home Assistant:
         href: https://ha.openshaw.tech
         description: Open source home automation platform
