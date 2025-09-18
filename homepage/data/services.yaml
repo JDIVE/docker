@@ -12,7 +12,7 @@
         description: Microsoft email service
         icon: si-microsoftoutlook
     - Discord:
-        href: https://discord.com/
+        href: https://discord.com/channels/@me
         description: Voice, video, and text communication
         icon: si-discord
 
