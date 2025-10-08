@@ -87,6 +87,10 @@
         href: https://bolt.new/
         description: AI development environment by StackBlitz
         icon: mdi-lightning-bolt
+    - Devin AI:
+        href: https://devin.ai/
+        description: AI software engineer
+        icon: mdi-robot-industrial
 
 - Knowledge & Tasks:
     - Linear:
