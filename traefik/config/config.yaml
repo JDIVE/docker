@@ -9,12 +9,30 @@ http:
       tls:
         certResolver: letsencrypt
 
+    # TrueNAS 02 Configuration
+    truenas-02:
+      rule: "Host(`truenas-02.openshaw.tech`)"
+      entryPoints:
+        - websecure
+      service: truenas-02-service
+      tls:
+        certResolver: letsencrypt
+
     # Proxmox Configuration
     proxmox:
       rule: "Host(`pve-01.openshaw.tech`)"
       entryPoints:
         - websecure
       service: proxmox-service
+      tls:
+        certResolver: letsencrypt
+
+    # Proxmox 02 Configuration
+    proxmox-02:
+      rule: "Host(`pve-02.openshaw.tech`)"
+      entryPoints:
+        - websecure
+      service: proxmox-02-service
       tls:
         certResolver: letsencrypt
 
@@ -49,11 +67,27 @@ http:
         passHostHeader: true
         serversTransport: insecure-transport
 
+    # TrueNAS 02 Service Configuration
+    truenas-02-service:
+      loadBalancer:
+        servers:
+          - url: "https://10.1.10.16:443"
+        passHostHeader: true
+        serversTransport: insecure-transport
+
     # Proxmox Service Configuration
     proxmox-service:
       loadBalancer:
         servers:
           - url: "https://10.1.10.2:8006"
+        passHostHeader: true
+        serversTransport: insecure-transport
+
+    # Proxmox 02 Service Configuration
+    proxmox-02-service:
+      loadBalancer:
+        servers:
+          - url: "https://10.1.10.3:8006"
         passHostHeader: true
         serversTransport: insecure-transport
 

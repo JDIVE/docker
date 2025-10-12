@@ -115,12 +115,20 @@
         href: https://traefik.openshaw.tech
         description: Edge Router and Reverse Proxy
         icon: mdi-router-network
-    - Proxmox:
+    - PVE-01:
         href: https://pve-01.openshaw.tech
         description: Virtualization Platform
         icon: si-proxmox
-    - TrueNAS:
+    - PVE-02:
+        href: https://pve-02.openshaw.tech
+        description: Virtualization Platform
+        icon: si-proxmox
+    - TrueNAS-01:
         href: https://truenas-01.openshaw.tech
+        description: Network Attached Storage
+        icon: mdi-nas
+    - TrueNAS-02:
+        href: https://truenas-02.openshaw.tech
         description: Network Attached Storage
         icon: mdi-nas
     - UniFi Controller:
