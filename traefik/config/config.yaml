@@ -36,6 +36,15 @@ http:
       tls:
         certResolver: letsencrypt
 
+    # Proxmox 03 Configuration
+    proxmox-03:
+      rule: "Host(`pve-03.openshaw.tech`)"
+      entryPoints:
+        - websecure
+      service: proxmox-03-service
+      tls:
+        certResolver: letsencrypt
+
     # UniFi Controller Configuration
     unifi:
       rule: "Host(`unifi.openshaw.tech`)"
@@ -88,6 +97,14 @@ http:
       loadBalancer:
         servers:
           - url: "https://10.1.10.3:8006"
+        passHostHeader: true
+        serversTransport: insecure-transport
+
+    # Proxmox 03 Service Configuration
+    proxmox-03-service:
+      loadBalancer:
+        servers:
+          - url: "https://10.1.10.4:8006"
         passHostHeader: true
         serversTransport: insecure-transport
 
