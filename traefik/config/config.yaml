@@ -45,16 +45,6 @@ http:
       tls:
         certResolver: letsencrypt
 
-    # UniFi Controller Configuration
-    unifi:
-      rule: "Host(`unifi.openshaw.tech`)"
-      entryPoints:
-        - websecure
-      service: unifi-service
-      tls:
-        certResolver: letsencrypt
-      middlewares:
-        - unifi-headers
   services:
     # TrueNAS Service Configuration
     truenas-service:
@@ -96,20 +86,6 @@ http:
         passHostHeader: true
         serversTransport: insecure-transport
 
-    # UniFi Service Configuration
-    unifi-service:
-      loadBalancer:
-        servers:
-          - url: "https://10.1.10.1:443"
-        passHostHeader: true
-        serversTransport: insecure-transport
-    unifi-headers:
-      headers:
-        customRequestHeaders:
-          X-Forwarded-Proto: "https"
-        hostsProxyHeaders:
-          - "X-Forwarded-Host"
-    # Dashboard Basic Authentication
     traefik-auth:
       basicAuth:
         usersFile: "/auth/users.txt" # Reverted back to using usersFile
