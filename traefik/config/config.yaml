@@ -55,18 +55,6 @@ http:
         certResolver: letsencrypt
       middlewares:
         - unifi-headers
-
-    # Kasm Configuration
-    kasm:
-      rule: "Host(`kasm.openshaw.tech`)"
-      entryPoints:
-        - websecure
-      service: kasm-service
-      tls:
-        certResolver: letsencrypt
-      middlewares:
-        - kasm-headers
-
   services:
     # TrueNAS Service Configuration
     truenas-service:
@@ -115,32 +103,12 @@ http:
           - url: "https://10.1.10.1:443"
         passHostHeader: true
         serversTransport: insecure-transport
-
-    # Kasm Service Configuration
-    kasm-service:
-      loadBalancer:
-        servers:
-          - url: "https://10.1.10.20:443"
-        passHostHeader: true
-        serversTransport: insecure-transport
-
-  middlewares:
-    # Custom headers for UniFi
     unifi-headers:
       headers:
         customRequestHeaders:
           X-Forwarded-Proto: "https"
         hostsProxyHeaders:
           - "X-Forwarded-Host"
-
-    # Kasm headers
-    kasm-headers:
-      headers:
-        customRequestHeaders:
-          X-Forwarded-Proto: "https"
-        hostsProxyHeaders:
-          - "X-Forwarded-Host"
-
     # Dashboard Basic Authentication
     traefik-auth:
       basicAuth:
@@ -152,12 +120,3 @@ http:
     # Allow self-signed certificates on backend servers
     insecure-transport:
       insecureSkipVerify: true
-
-    # Specific transport for Kasm with SSL configuration
-    kasm-transport:
-      insecureSkipVerify: true
-      maxIdleConnsPerHost: 100
-      forwardingTimeouts:
-        dialTimeout: 30s
-        responseHeaderTimeout: 5s
-        idleConnTimeout: 60s
