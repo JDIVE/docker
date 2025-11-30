@@ -115,6 +115,10 @@
         href: https://pve-02.openshaw.tech
         description: Virtualization Platform
         icon: si-proxmox
+    - PVE-03:
+        href: https://pve-03.openshaw.tech
+        description: Virtualization Platform
+        icon: si-proxmox
     - TrueNAS-01:
         href: https://truenas-01.openshaw.tech
         description: Network Attached Storage
