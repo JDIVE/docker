@@ -16,6 +16,10 @@ traefik/auth/
 
 # Environment files
 **/.env
+**/.env.*
+
+# Backup files (may contain secrets)
+**/*.backup
 
 # Logs
 **/logs/
