@@ -1,10 +1,15 @@
-#\!/usr/bin/env python3
+#!/usr/bin/env python3
 import os
+import sys
 from neo4j import GraphDatabase
 
 uri = os.getenv('NEO4J_URL', 'bolt://localhost:7687')
 username = os.getenv('NEO4J_USERNAME', 'neo4j')
-password = os.getenv('NEO4J_PASSWORD', 'password123')
+password = os.getenv('NEO4J_PASSWORD')
+
+if not password:
+    print("Error: NEO4J_PASSWORD environment variable is required")
+    sys.exit(1)
 
 print(f"Connecting to {uri} as {username}")
 
