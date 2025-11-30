@@ -41,10 +41,6 @@
         href: https://www.perplexity.ai/
         description: AI-powered search and research
         icon: mdi-magnify
-    - Grok:
-        href: https://grok.com/
-        description: AI assistant by xAI
-        icon: si-x
     - Open WebUI:
         href: https://ai.openshaw.tech
         description: Web interface for Ollama AI models
@@ -94,13 +90,9 @@
 
 - Knowledge & Tasks:
     - Linear:
-        href: https://linear.app/
+        href: https://linear.app/openshaw/view/personal-tasks-by-project-7aa8f378b8a9
         description: Issue tracking and project management
         icon: si-linear
-    - Notion:
-        href: https://notion.so/
-        description: All-in-one workspace for notes and docs
-        icon: si-notion
     - Readwise Reader:
         href: https://read.readwise.io/
         description: Read-it-later app with AI features
@@ -132,17 +124,13 @@
         description: Network Attached Storage
         icon: mdi-nas
     - UniFi Controller:
-        href: https://unifi.openshaw.tech
+        href: https://unifi.ui.com/consoles
         description: Network Management
         icon: si-ubiquiti
     - Uptime Kuma:
         href: https://uptime.openshaw.tech
         description: Service monitoring and status page
         icon: mdi-heart-pulse
-    - Kasm:
-        href: https://kasm.openshaw.tech
-        description: Container Streaming Platform
-        icon: mdi-desktop-classic
 
 - Entertainment & Media:
     - YouTube:
