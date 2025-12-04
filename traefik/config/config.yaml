@@ -86,11 +86,10 @@ http:
         passHostHeader: true
         serversTransport: insecure-transport
 
+  middlewares:
     traefik-auth:
       basicAuth:
-        usersFile: "/auth/users.txt" # Reverted back to using usersFile
-        # users:
-        #   - "admin:$apr1$5jLg6llm$BKcMZMbNpOeNN0F1j827i."
+        usersFile: "/auth/users.txt"
 
   serversTransports:
     # Allow self-signed certificates on backend servers
