@@ -38,4 +38,5 @@ NVIDIA NeMo-based speech-to-text server running on Tesla P4.
 
 - Image must be transferred manually (90GB NeMo base image)
 - First start downloads ~2GB of models to the volume
-- Connects to Ollama on the same Docker network for LLM cleanup
+- LLM cleanup via Ollama is available but currently disabled (small models lack precision)
+- NeMo's built-in punctuation model handles capitalisation and formatting
