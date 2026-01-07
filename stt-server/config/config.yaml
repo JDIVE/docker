@@ -1,0 +1,25 @@
+# Custom vocabulary - terms to recognize correctly
+vocabulary:
+  - Petrofac
+  - Serica
+  - Anasuria
+  - HSE
+  - FPSO
+  - AOC
+  - Kittiwake
+  - EnQuest
+
+# LLM cleanup prompt
+cleanup_prompt: |
+  Clean this transcript. Rules:
+  1. Remove filler words: um, uh, like, you know, sort of, kind of, basically, actually
+  2. Fix these terms if misheard: {vocabulary}
+  3. Fix punctuation and capitalisation
+  4. Keep the meaning exactly - don't rephrase
+  5. Output only the cleaned text, nothing else
+
+# Quick regex replacements (applied before LLM)
+replacements:
+  "petro fac": "Petrofac"
+  "sarah ka": "Serica"
+  "anna syria": "Anasuria"
