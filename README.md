@@ -90,6 +90,13 @@
 - Standardizes API calls to various LLMs
 - Provides load balancing and fallback options
 
+#### STT Server
+- Self-hosted speech-to-text using NVIDIA NeMo
+- Parakeet TDT model for fast transcription
+- Punctuation, capitalisation, and ITN post-processing
+- Optional LLM cleanup via Ollama
+- REST API with Bearer token authentication
+
 #### n8n
 - Workflow automation platform
 - Connects different services and APIs
@@ -295,6 +302,7 @@ Verify service access through your domain names:
 - https://ollama.openshaw.tech
 - https://linkwarden.openshaw.tech
 - https://uptime.openshaw.tech
+- https://stt.openshaw.tech
 
 ## Configuration Details
 
