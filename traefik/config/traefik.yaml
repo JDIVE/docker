@@ -1,5 +1,5 @@
 log:
-  level: DEBUG
+  level: INFO
 
 api:
   dashboard: true
@@ -16,12 +16,6 @@ entryPoints:
           scheme: https
   websecure:
     address: ":443"
-    http:
-      tls:
-        certResolver: letsencrypt
-        domains:
-          - main: "openshaw.tech"
-            sans: ["*.openshaw.tech"]
 
 # Configure your certificate resolver here
 certificatesResolvers:
