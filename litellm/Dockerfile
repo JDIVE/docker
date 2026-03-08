@@ -3,7 +3,7 @@ FROM python:3.9-slim
 WORKDIR /app
 
 # Install litellm
-RUN pip install litellm[proxy]
+RUN pip install litellm[proxy] python-multipart
 
 # Copy configuration
 COPY ./data/config.yaml /app/config.yaml
