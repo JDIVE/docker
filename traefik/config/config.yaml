@@ -1,5 +1,14 @@
 http:
   routers:
+    # Home Assistant Configuration
+    homeassistant:
+      rule: "Host(`ha.openshaw.tech`)"
+      entryPoints:
+        - websecure
+      service: homeassistant-service
+      tls:
+        certResolver: letsencrypt
+
     # TrueNAS Configuration
     truenas:
       rule: "Host(`truenas-01.openshaw.tech`)"
@@ -45,7 +54,23 @@ http:
       tls:
         certResolver: letsencrypt
 
+    # OpenClaw Configuration
+    openclaw:
+      rule: "Host(`openclaw.openshaw.tech`)"
+      entryPoints:
+        - websecure
+      service: openclaw-service
+      tls:
+        certResolver: letsencrypt
+
   services:
+    # Home Assistant Service Configuration
+    homeassistant-service:
+      loadBalancer:
+        servers:
+          - url: "http://10.1.40.50:8123"
+        passHostHeader: true
+
     # TrueNAS Service Configuration
     truenas-service:
       loadBalancer:
@@ -85,6 +110,13 @@ http:
           - url: "https://10.1.10.4:8006"
         passHostHeader: true
         serversTransport: insecure-transport
+
+    # OpenClaw Service Configuration
+    openclaw-service:
+      loadBalancer:
+        servers:
+          - url: "http://10.1.40.52:18789"
+        passHostHeader: true
 
   middlewares:
     traefik-auth:
