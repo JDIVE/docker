@@ -45,10 +45,6 @@
         href: https://ai.openshaw.tech
         description: Web interface for Ollama AI models
         icon: mdi-robot
-    - LiteLLM:
-        href: https://litellm.openshaw.tech
-        description: LLM API Gateway and Router
-        icon: si-fastapi
     - Chat PRD:
         href: https://app.chatprd.ai/
         description: AI copilot for writing product requirements documents

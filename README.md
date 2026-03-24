@@ -85,11 +85,6 @@
 - Provides a user-friendly chat interface
 - Manages models and configurations
 
-#### LiteLLM
-- LLM API Gateway and Router
-- Standardizes API calls to various LLMs
-- Provides load balancing and fallback options
-
 #### n8n
 - Workflow automation platform
 - Connects different services and APIs
