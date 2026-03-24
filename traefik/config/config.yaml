@@ -54,15 +54,6 @@ http:
       tls:
         certResolver: letsencrypt
 
-    # OpenClaw Configuration
-    openclaw:
-      rule: "Host(`openclaw.openshaw.tech`)"
-      entryPoints:
-        - websecure
-      service: openclaw-service
-      tls:
-        certResolver: letsencrypt
-
   services:
     # Home Assistant Service Configuration
     homeassistant-service:
@@ -110,13 +101,6 @@ http:
           - url: "https://10.1.10.4:8006"
         passHostHeader: true
         serversTransport: insecure-transport
-
-    # OpenClaw Service Configuration
-    openclaw-service:
-      loadBalancer:
-        servers:
-          - url: "http://10.1.40.52:18789"
-        passHostHeader: true
 
   middlewares:
     traefik-auth:
