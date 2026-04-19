@@ -98,6 +98,12 @@
 - Organize links with collections and tags
 - Accessed via Traefik reverse proxy
 
+#### Infisical
+- Self-hosted secrets management platform
+- Trial deployment for internal secret storage and delivery
+- Uses a stack-local Postgres and Redis during evaluation
+- Accessed via Traefik reverse proxy
+
 
 
 ## Installation Guide
