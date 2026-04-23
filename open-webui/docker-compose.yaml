@@ -4,7 +4,7 @@ services:
     container_name: open-webui
     restart: unless-stopped
     environment:
-      - OLLAMA_API_BASE_URL=http://10.1.10.10:11434
+      - OLLAMA_API_BASE_URL=http://10.1.40.151:11434
     volumes:
       - ./data:/app/backend/data
     networks:
