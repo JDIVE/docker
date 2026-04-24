@@ -54,6 +54,15 @@ http:
       tls:
         certResolver: letsencrypt
 
+    # vLLM Studio Configuration
+    vllm-studio:
+      rule: "Host(`vllm.openshaw.tech`)"
+      entryPoints:
+        - websecure
+      service: vllm-studio-service
+      tls:
+        certResolver: letsencrypt
+
   services:
     # Home Assistant Service Configuration
     homeassistant-service:
@@ -101,6 +110,13 @@ http:
           - url: "https://10.1.10.4:8006"
         passHostHeader: true
         serversTransport: insecure-transport
+
+    # vLLM Studio Service Configuration
+    vllm-studio-service:
+      loadBalancer:
+        servers:
+          - url: "http://10.1.40.151:3000"
+        passHostHeader: true
 
   middlewares:
     traefik-auth:
