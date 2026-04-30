@@ -63,6 +63,15 @@ http:
       tls:
         certResolver: letsencrypt
 
+    # Forgejo Configuration
+    forgejo:
+      rule: "Host(`forgejo.openshaw.tech`)"
+      entryPoints:
+        - websecure
+      service: forgejo-service
+      tls:
+        certResolver: letsencrypt
+
   services:
     # Home Assistant Service Configuration
     homeassistant-service:
@@ -110,6 +119,13 @@ http:
           - url: "https://10.1.10.4:8006"
         passHostHeader: true
         serversTransport: insecure-transport
+
+    # Forgejo Service Configuration
+    forgejo-service:
+      loadBalancer:
+        servers:
+          - url: "http://10.1.10.11:3000"
+        passHostHeader: true
 
     # vLLM Studio Service Configuration
     vllm-studio-service:
