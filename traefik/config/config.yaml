@@ -54,15 +54,6 @@ http:
       tls:
         certResolver: letsencrypt
 
-    # vLLM Studio Configuration
-    vllm-studio:
-      rule: "Host(`vllm.openshaw.tech`)"
-      entryPoints:
-        - websecure
-      service: vllm-studio-service
-      tls:
-        certResolver: letsencrypt
-
     # Forgejo Configuration
     forgejo:
       rule: "Host(`forgejo.openshaw.tech`)"
@@ -71,6 +62,16 @@ http:
       service: forgejo-service
       tls:
         certResolver: letsencrypt
+
+    # Open WebUI on llm-01
+    open-webui:
+      rule: "Host(`ai.openshaw.tech`)"
+      entryPoints:
+        - websecure
+      service: open-webui-service
+      tls:
+        certResolver: letsencrypt
+
 
   services:
     # Home Assistant Service Configuration
@@ -127,12 +128,13 @@ http:
           - url: "http://10.1.10.11:3000"
         passHostHeader: true
 
-    # vLLM Studio Service Configuration
-    vllm-studio-service:
+    # Open WebUI Service on llm-01
+    open-webui-service:
       loadBalancer:
         servers:
-          - url: "http://10.1.40.151:3000"
+          - url: "http://10.1.40.121:8080"
         passHostHeader: true
+
 
   middlewares:
     traefik-auth:
