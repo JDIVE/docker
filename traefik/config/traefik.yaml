@@ -16,6 +16,8 @@ entryPoints:
           scheme: https
   websecure:
     address: ":443"
+  gitssh:
+    address: ":2222"
 
 # Configure your certificate resolver here
 certificatesResolvers:

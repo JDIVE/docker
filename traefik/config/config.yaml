@@ -143,3 +143,17 @@ http:
     # Allow self-signed certificates on backend servers
     insecure-transport:
       insecureSkipVerify: true
+
+tcp:
+  routers:
+    forgejo-ssh:
+      entryPoints:
+        - gitssh
+      rule: "HostSNI(`*`)"
+      service: forgejo-ssh-service
+
+  services:
+    forgejo-ssh-service:
+      loadBalancer:
+        servers:
+          - address: "10.1.10.11:2222"
